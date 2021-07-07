@@ -70,18 +70,19 @@ function SetUpNPC(spriteImage: Image, mapX: number, mapY: number, behavior: (spr
 let Money = 0
 const NPCBehaviors: {[key: string]: (sprt: Sprite) => void} = {}
 tiles.setTilemap(tilemap`Maze1`)
-const PrincessSprite = SetUpNPC(sprites.castle.princess2Front, 10, 4, (sprt: Sprite) => {
+const Princess1NPCSprite = SetUpNPC(sprites.castle.princessFront0, 10, 4, (sprt: Sprite) => {
     if (CheckWinCondition()) {
         game.over(true)
     } else {
         sprt.say("Need " + WinMoney + " money.", 5000)
     }
 })
-const Princess2Sprite = SetUpNPC(sprites.castle.princessFront0, 1, 18, (sprt: Sprite) => {sprt.say("Hey there!", 5000)})
-const Princess2SpriteB = SetUpNPC(sprites.castle.princess2Front, 3, 21, (sprt: Sprite) => {sprt.say("Hi.", 5000)})
+const Princess2NPCSprite = SetUpNPC(sprites.castle.princess2Front, 1, 18, (sprt: Sprite) => {sprt.say("Hey there!", 5000)})
+const DogNPCSprite = SetUpNPC(sprites.builtin.dog0, 3, 21, (sprt: Sprite) => {sprt.say("Woof.", 5000)})
+const GirlNPCSprite = SetUpNPC(sprites.builtin.villager1WalkFront1, 20, 0, (sprt: Sprite) => {sprt.say("Hello dear!", 5000)})
+const WitchNPCSprite = SetUpNPC(sprites.swamp.witchForward0, 26, 0, (sprt: Sprite) => {sprt.say("Go away!", 5000)})
 const WinMoney = 350
-let Player1Sprite: Sprite = null
-Player1Sprite = sprites.create(sprites.builtin.villager4WalkFront1, SpriteKind.Player)
+const Player1Sprite = sprites.create(sprites.builtin.villager4WalkFront1, SpriteKind.Player)
 controller.moveSprite(Player1Sprite)
 tiles.placeOnRandomTile(Player1Sprite, sprites.dungeon.floorLight0)
 scene.cameraFollowSprite(Player1Sprite)
