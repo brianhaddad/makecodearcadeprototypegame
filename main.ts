@@ -35,17 +35,17 @@ function EvaluatePlayer1Sprite () {
         )
     }
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
-    const key = GetSpriteKey(otherSprite)
-    if (NPCBehaviors[key]) {
-        NPCBehaviors[key](otherSprite)
-    }
-})
 controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
     EvaluatePlayer1Sprite()
 })
 controller.anyButton.onEvent(ControllerButtonEvent.Released, function () {
     EvaluatePlayer1Sprite()
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
+    const key = GetSpriteKey(otherSprite)
+    if (NPCBehaviors[key]) {
+        NPCBehaviors[key](otherSprite)
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
     tiles.placeOnTile(sprites.create(assets.image`OpenChest`, SpriteKind.Overlay), location)
@@ -70,6 +70,7 @@ function SetUpNPC(spriteImage: Image, mapX: number, mapY: number, behavior: (spr
 let Money = 0
 const NPCBehaviors: {[key: string]: (sprt: Sprite) => void} = {}
 tiles.setTilemap(tilemap`Maze1`)
+scene.setBackgroundColor(7)
 const Princess1NPCSprite = SetUpNPC(sprites.castle.princessFront0, 10, 4, (sprt: Sprite) => {
     if (CheckWinCondition()) {
         game.over(true)
